@@ -8,4 +8,6 @@ add_executable(MazeSolver main.cpp
         main.cpp
         robot.cpp
         robot.h
+        matrix.cpp
+        matrix.h
 )

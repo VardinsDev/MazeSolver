@@ -1,14 +1,25 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <thread>
+#include <chrono>
 
+#include "matrix.h"
 #include "robot.h"
 
 using namespace std;
-void printMaze(const std::vector<std::vector<char>>& matrix, const Robot& robot) {
-    // 1. Get the dimensions of the matrix
-    size_t rows = matrix.size();
-    if (rows == 0) return; // Guard clause for empty matrix
-    size_t cols = matrix[0].size();
+void clearScreen() {
+#ifdef _WIN32
+    std::system("cls");
+#else
+    std::system("clear");
+#endif
+}
+
+void printMaze(const Matrix& matrix, const Robot& robot) {
+    // 1. Get the dimensions using the new Matrix class methods
+    size_t rows = matrix.getRows();
+    size_t cols = matrix.getCols();
 
     // 2. Print top decorative border
     std::cout << "+";
@@ -21,11 +32,14 @@ void printMaze(const std::vector<std::vector<char>>& matrix, const Robot& robot)
     for (size_t r = 0; r < rows; ++r) {
         std::cout << "|"; // Left vertical border
         for (size_t c = 0; c < cols; ++c) {
+            // Check if the current grid slot matches the robot's coordinates
+            // Note: c represents X (columns), r represents Y (rows)
             if (r == robot.getY() && c == robot.getX()) {
-                    std::cout << " " << "R" << " ";
+                std::cout << " " << "R" << " ";
             }
             else {
-                std::cout << " " << matrix[r][c] << " ";
+                // Use the public safe accessor instead of matrix[r][c]
+                std::cout << " " << matrix.getTileAt(c, r) << " ";
             }
         }
         std::cout << "|\n"; // Right vertical border
@@ -40,14 +54,27 @@ void printMaze(const std::vector<std::vector<char>>& matrix, const Robot& robot)
 }
 
 int main() {
-    const std::vector<std::vector<char>> mazeMatrix = {
-        {'#', '#', '#'},
-        {'#', ' ', 'E'},
-        {'#', '#', '#'}
-    };
+    const Matrix matrix({
+        {'#', '#', '#', '#', '#'},
+        {'#', ' ', ' ', ' ', '#'},
+        {'#', ' ', '#', ' ', '#'},
+        {'#', ' ', '#', 'E', '#'},
+        {'#', '#', '#', '#', '#'}
+    });
 
-    const Robot robot(1, 1, 'E');
-    printMaze(mazeMatrix, robot);
+    Robot robot(1, 3, 'E');
+    printMaze(matrix, robot);
+
+    while (!robot.hasReachedExit(matrix)) {
+        if (!robot.scan(matrix)) {
+            robot.moveForward();
+        } else {
+            robot.turnRight();
+        }
+        clearScreen();
+        printMaze(matrix, robot);
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    }
 
     return 0;
 }
