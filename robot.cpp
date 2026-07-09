@@ -88,7 +88,7 @@ bool Robot::scan(const Matrix& matrix) {
                 return true;
             }
         case 'E':
-            if (matrix.getTileAt(x+1, y) == ' ' || matrix.getTileAt(x-1, y) == 'E') {
+            if (matrix.getTileAt(x+1, y) == ' ' || matrix.getTileAt(x+1, y) == 'E') {
                 return false;
             }
             if (matrix.getTileAt(x+1, y) == '#') {

@@ -10,4 +10,8 @@ add_executable(MazeSolver main.cpp
         robot.h
         matrix.cpp
         matrix.h
+        PathProcessing.cpp
+        PathProcessing.h
+        Utils.cpp
+        Utils.h
 )
