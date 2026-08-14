@@ -5,6 +5,7 @@
 #include <chrono>
 
 #include "matrix.h"
+#include "PathProcessing.h"
 #include "robot.h"
 #include "Utils.h"
 
@@ -35,9 +36,8 @@ int main() {
 });
 
     Robot robot(1, 1, 'E');
-    Utils utils;
-    utils.printMaze(matrix, robot);
-
+    PathProcessing paths;
+    paths.run(robot, matrix);
 
     return 0;
 }

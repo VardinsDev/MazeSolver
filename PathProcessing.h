@@ -4,7 +4,8 @@
 
 
 class PathProcessing {
-    void run(Robot robot);
+public:
+    void run(Robot robot, const Matrix& matrix);
 };
 
 

@@ -6,7 +6,7 @@
 #include "matrix.h"
 #include "robot.h"
 
-void clearScreen() {
+void Utils::clearScreen() {
 #ifdef _WIN32
     std::system("cls");
 #else
@@ -14,7 +14,7 @@ void clearScreen() {
 #endif
 }
 
-void printMaze(const Matrix& matrix, const Robot& robot) {
+void Utils::printMaze(const Matrix& matrix, const Robot& robot) {
     // 1. Get the dimensions using the new Matrix class methods
     size_t rows = matrix.getRows();
     size_t cols = matrix.getCols();

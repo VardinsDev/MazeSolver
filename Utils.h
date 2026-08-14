@@ -11,7 +11,7 @@
 class Utils {
 public:
     void clearScreen();
-    void printMaze(Matrix matrix, Robot robot);
+    void printMaze(const Matrix& matrix, const Robot& robot);
 };
 
 

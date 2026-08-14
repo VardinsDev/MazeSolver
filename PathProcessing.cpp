@@ -9,7 +9,7 @@
 
 #include "Utils.h"
 
-void run(Robot robot, const Matrix& matrix) {
+void PathProcessing::run(Robot robot, const Matrix& matrix) {
     Utils utils;
     Matrix mutableMatrix = matrix;
     bool pathBad = false;
