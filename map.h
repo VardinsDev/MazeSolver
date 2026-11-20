@@ -2,16 +2,16 @@
 // Created by rhys on 7/7/26.
 //
 
-#ifndef MAZESOLVER_MATRIX_H
-#define MAZESOLVER_MATRIX_H
+#ifndef MAZESOLVER_MAP_H
+#define MAZESOLVER_MAP_H
 #include <vector>
 
 
-class Matrix {
+class Map {
 private:
     std::vector<std::vector<char>> grid;
 public:
-    Matrix(std::vector<std::vector<char>> initialGrid);
+    Map(std::vector<std::vector<char>> initialGrid);
 
     // Member functions to interact with the grid safely
     size_t getRows() const;
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //MAZESOLVER_MATRIX_H
+#endif //MAZESOLVER_MAP_H

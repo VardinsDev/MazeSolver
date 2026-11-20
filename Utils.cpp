@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "matrix.h"
+#include "map.h"
 #include "robot.h"
 
 void Utils::clearScreen() {
@@ -14,10 +14,10 @@ void Utils::clearScreen() {
 #endif
 }
 
-void Utils::printMaze(const Matrix& matrix, const Robot& robot) {
-    // 1. Get the dimensions using the new Matrix class methods
-    size_t rows = matrix.getRows();
-    size_t cols = matrix.getCols();
+void Utils::printMaze(const Map& map, const Robot& robot) {
+    // 1. Get the dimensions using the new Map class methods
+    size_t rows = map.getRows();
+    size_t cols = map.getCols();
 
     // 2. Print top decorative border
     std::cout << "+";
@@ -36,8 +36,8 @@ void Utils::printMaze(const Matrix& matrix, const Robot& robot) {
                 std::cout << " " << "R" << " ";
             }
             else {
-                // Use the public safe accessor instead of matrix[r][c]
-                std::cout << " " << matrix.getTileAt(c, r) << " ";
+                // Use the public safe accessor instead of map[r][c]
+                std::cout << " " << map.getTileAt(c, r) << " ";
             }
         }
         std::cout << "|\n"; // Right vertical border

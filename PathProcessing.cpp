@@ -9,17 +9,17 @@
 
 #include "Utils.h"
 
-void PathProcessing::run(Robot robot, const Matrix& matrix) {
+void PathProcessing::run(Robot robot, const Map& map) {
     Utils utils;
-    Matrix mutableMatrix = matrix;
+    Map mutableMap = map;
     bool pathBad = false;
 
     int turnStreak = 0;
-    while (!robot.hasReachedExit(matrix)) {
-        if (!robot.scan(matrix)) {
+    while (!robot.hasReachedExit(map)) {
+        if (!robot.scan(map)) {
             if (pathBad) {
                 robot.turnRight();
-                if (robot.scan(matrix)) {
+                if (robot.scan(map)) {
 
                 }
             }
@@ -29,14 +29,14 @@ void PathProcessing::run(Robot robot, const Matrix& matrix) {
             turnStreak ++;
             if (turnStreak == 2) {
                 robot.turnRight();
-                if (robot.scan(matrix)) {
+                if (robot.scan(map)) {
                     pathBad = true;
                 }
             }
             robot.turnRight();
         }
         utils.clearScreen();
-        utils.printMaze(matrix, robot);
+        utils.printMaze(map, robot);
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 }

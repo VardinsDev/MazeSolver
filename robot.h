@@ -7,7 +7,7 @@
 #pragma once
 #include <vector>
 
-#include "matrix.h"
+#include "map.h"
 
 
 class Robot {
@@ -22,8 +22,8 @@ public:
     int getX() const;
     int getY() const;
     void moveForward();
-    bool scan(const Matrix& matrix);
-    bool hasReachedExit(const Matrix& matrix);
+    bool scan(const Map& map);
+    bool hasReachedExit(const Map& map);
 };
 
 

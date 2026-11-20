@@ -1,7 +1,7 @@
 #include "robot.h"
 #include <iostream>
 
-#include "matrix.h"
+#include "map.h"
 
 Robot::Robot(int startX, int startY, char startDir)
     : x(startX), y(startY), direction(startDir) {}
@@ -78,34 +78,34 @@ int Robot::getY() const {
 /**
  * @return true if there is an obstacle in the way of the direction the robot is looking, false if not.
  */
-bool Robot::scan(const Matrix& matrix) {
+bool Robot::scan(const Map& map) {
     switch (direction) {
         case 'N':
-            if (matrix.getTileAt(x, y-1) == ' ' || matrix.getTileAt(x, y-1) == 'E') {
+            if (map.getTileAt(x, y-1) == ' ' || map.getTileAt(x, y-1) == 'E') {
                 return false;
             }
-            if (matrix.getTileAt(x, y-1) == '#') {
+            if (map.getTileAt(x, y-1) == '#') {
                 return true;
             }
         case 'E':
-            if (matrix.getTileAt(x+1, y) == ' ' || matrix.getTileAt(x+1, y) == 'E') {
+            if (map.getTileAt(x+1, y) == ' ' || map.getTileAt(x+1, y) == 'E') {
                 return false;
             }
-            if (matrix.getTileAt(x+1, y) == '#') {
+            if (map.getTileAt(x+1, y) == '#') {
                 return true;
             }
         case 'S':
-            if (matrix.getTileAt(x, y+1) == '#') {
+            if (map.getTileAt(x, y+1) == '#') {
                 return true;
             }
-            if (matrix.getTileAt(x, y+1) == 'E' || matrix.getTileAt(x, y+1) == ' ') {
+            if (map.getTileAt(x, y+1) == 'E' || map.getTileAt(x, y+1) == ' ') {
                 return false;
             }
         case 'W':
-            if (matrix.getTileAt(x-1, y) == ' ' || matrix.getTileAt(x-1, y) == 'E') {
+            if (map.getTileAt(x-1, y) == ' ' || map.getTileAt(x-1, y) == 'E') {
                 return false;
             }
-            if (matrix.getTileAt(x-1, y) == '#') {
+            if (map.getTileAt(x-1, y) == '#') {
                 return true;
             }
         default:
@@ -113,9 +113,9 @@ bool Robot::scan(const Matrix& matrix) {
     }
 }
 
-bool Robot::hasReachedExit(const Matrix& matrix) {
+bool Robot::hasReachedExit(const Map& map) {
     // Check if the tile at our current (x, y) is the Exit character
-    if (matrix.getTileAt(x, y) == 'E') {
+    if (map.getTileAt(x, y) == 'E') {
         return true;
     }
     return false;

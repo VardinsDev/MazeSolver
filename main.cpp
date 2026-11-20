@@ -4,15 +4,16 @@
 #include <thread>
 #include <chrono>
 
-#include "matrix.h"
+#include "map.h"
 #include "PathProcessing.h"
+#include "raylib.h"
 #include "robot.h"
 #include "Utils.h"
 
 using namespace std;
 
 int main() {
-    const Matrix matrix({
+    const Map map({
     {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
     {'#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
     {'#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#'},
@@ -37,7 +38,7 @@ int main() {
 
     Robot robot(1, 1, 'E');
     PathProcessing paths;
-    paths.run(robot, matrix);
+    paths.run(robot, map);
 
     return 0;
 }
